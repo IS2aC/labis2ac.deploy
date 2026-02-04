@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS — Innovation Digitale</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">NEXUS</div>
+            <ul class="nav-menu">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">À propos</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <span class="label">Innovation · Design · Technologie</span>
+                    <h1 class="hero-title">
+                        Transformez<br>
+                        <span class="accent">votre vision</span><br>
+                        en réalité digitale
+                    </h1>
+                    <p class="hero-description">
+                        Nous créons des expériences numériques exceptionnelles qui propulsent votre entreprise vers l'avenir.
+                    </p>
+                    <div class="cta-group">
+                        <button class="btn btn-primary">Démarrer un projet</button>
+                        <button class="btn btn-secondary">Découvrir nos réalisations</button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="floating-card card-1">
+                        <div class="card-icon">⚡</div>
+                        <div class="card-text">Performance</div>
+                    </div>
+                    <div class="floating-card card-2">
+                        <div class="card-icon">🎨</div>
+                        <div class="card-text">Design</div>
+                    </div>
+                    <div class="floating-card card-3">
+                        <div class="card-icon">🚀</div>
+                        <div class="card-text">Innovation</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="services">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-label">Ce que nous faisons</span>
+                    <h2 class="section-title">Services</h2>
+                </div>
+                <div class="services-grid">
+                    <article class="service-card">
+                        <div class="service-number">01</div>
+                        <h3 class="service-title">Développement Web</h3>
+                        <p class="service-description">
+                            Applications web modernes, rapides et scalables construites avec les dernières technologies.
+                        </p>
+                        <div class="service-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">Node.js</span>
+                        </div>
+                    </article>
+                    <article class="service-card">
+                        <div class="service-number">02</div>
+                        <h3 class="service-title">Design UX/UI</h3>
+                        <p class="service-description">
+                            Interfaces intuitives et esthétiques qui placent l'utilisateur au centre de l'expérience.
+                        </p>
+                        <div class="service-tags">
+                            <span class="tag">Figma</span>
+                            <span class="tag">Prototypage</span>
+                            <span class="tag">Recherche UX</span>
+                        </div>
+                    </article>
+                    <article class="service-card">
+                        <div class="service-number">03</div>
+                        <h3 class="service-title">Stratégie Digitale</h3>
+                        <p class="service-description">
+                            Accompagnement stratégique pour maximiser votre impact digital et atteindre vos objectifs.
+                        </p>
+                        <div class="service-tags">
+                            <span class="tag">Consulting</span>
+                            <span class="tag">Analytics</span>
+                            <span class="tag">Growth</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <div class="about-grid">
+                    <div class="about-content">
+                        <span class="section-label">Notre approche</span>
+                        <h2 class="section-title">L'excellence par le détail</h2>
+                        <p class="about-text">
+                            Depuis plus de 10 ans, nous combinons expertise technique et vision créative pour 
+                            concevoir des solutions digitales qui font la différence. Notre engagement : 
+                            transformer vos idées en produits exceptionnels.
+                        </p>
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="stat-number">150+</div>
+                                <div class="stat-label">Projets réalisés</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">98%</div>
+                                <div class="stat-label">Clients satisfaits</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">24/7</div>
+                                <div class="stat-label">Support technique</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-visual">
+                        <div class="visual-placeholder"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="contact-wrapper">
+                    <div class="contact-info">
+                        <span class="section-label">Prêt à commencer ?</span>
+                        <h2 class="section-title">Discutons de votre projet</h2>
+                        <p class="contact-text">
+                            Que vous ayez une idée précise ou que vous cherchiez simplement des conseils, 
+                            notre équipe est là pour vous accompagner.
+                        </p>
+                        <div class="contact-details">
+                            <div class="detail">
+                                <div class="detail-icon">📧</div>
+                                <div>
+                                    <div class="detail-label">Email</div>
+                                    <div class="detail-value">contact@nexus.com</div>
+                                </div>
+                            </div>
+                            <div class="detail">
+                                <div class="detail-icon">📱</div>
+                                <div>
+                                    <div class="detail-label">Téléphone</div>
+                                    <div class="detail-value">+33 1 23 45 67 89</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Nom complet</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">Envoyer le message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">NEXUS</div>
+                    <p>Innovation digitale depuis 2015</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#services">Développement</a></li>
+                            <li><a href="#services">Design</a></li>
+                            <li><a href="#services">Stratégie</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Entreprise</h4>
+                        <ul>
+                            <li><a href="#about">À propos</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                            <li><a href="#">Carrières</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Suivez-nous</h4>
+                        <ul>
+                            <li><a href="#">LinkedIn</a></li>
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Instagram</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 NEXUS. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

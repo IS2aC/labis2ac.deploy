@@ -1,229 +1,589 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEXUS — Innovation Digitale</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>labis2ac — DevOps & Data Lab</title>
+
+  <style>
+    :root{
+      --bg1:#070A13;
+      --bg2:#0B1220;
+      --card:#0f1a33;
+      --card2:#0b1630;
+      --text:#EAF0FF;
+      --muted:#A9B6D3;
+      --line:rgba(255,255,255,.10);
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 22px;
+      --accent1:#6D5BFF;
+      --accent2:#1EE3CF;
+      --accent3:#FF4D8D;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 15% 15%, rgba(109,91,255,.35), transparent 60%),
+        radial-gradient(800px 520px at 75% 25%, rgba(30,227,207,.25), transparent 55%),
+        radial-gradient(800px 500px at 60% 85%, rgba(255,77,141,.18), transparent 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    /* Subtle grid overlay */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(closest-side at 50% 30%, rgba(0,0,0,.9), rgba(0,0,0,.1));
+      opacity:.35;
+    }
+
+    .wrap{
+      position:relative;
+      max-width:1150px;
+      margin:0 auto;
+      padding:28px 18px 70px;
+    }
+
+    /* Nav */
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:14px 16px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background: rgba(10, 16, 33, .55);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 30px rgba(0,0,0,.35);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      color:var(--text);
+    }
+
+    .logo{
+      width:38px;
+      height:38px;
+      border-radius:14px;
+      background: linear-gradient(135deg, var(--accent1), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(109,91,255,.18);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo::after{
+      content:"";
+      position:absolute;
+      inset:-20px;
+      background: radial-gradient(circle at 30% 35%, rgba(255,255,255,.45), transparent 55%);
+      transform: rotate(12deg);
+    }
+
+    .brand strong{
+      font-size:14px;
+      letter-spacing:.8px;
+      text-transform:uppercase;
+    }
+    .brand span{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+      margin-top:2px;
+    }
+
+    .navlinks{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .pill{
+      padding:9px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color:var(--text);
+      text-decoration:none;
+      font-size:12px;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .pill:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.18);
+    }
+
+    .cta{
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: linear-gradient(135deg, rgba(109,91,255,.92), rgba(30,227,207,.85));
+      color:#091022;
+      font-weight:800;
+      text-decoration:none;
+      font-size:12px;
+      letter-spacing:.2px;
+      box-shadow: 0 14px 40px rgba(109,91,255,.22);
+      transition: transform .18s ease;
+      white-space:nowrap;
+    }
+    .cta:hover{
+      transform: translateY(-1px) scale(1.01);
+    }
+
+    /* Hero */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      margin-top:18px;
+      align-items:stretch;
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      background: rgba(12, 20, 42, .55);
+      backdrop-filter: blur(14px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .hero-left{
+      padding:34px 28px 28px;
+      min-height: 340px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      border-radius:999px;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: linear-gradient(135deg, var(--accent2), var(--accent1));
+      box-shadow: 0 0 0 5px rgba(30,227,207,.12);
+    }
+
+    h1{
+      margin:16px 0 10px;
+      font-size:46px;
+      line-height:1.05;
+      letter-spacing:-1px;
+    }
+    h1 .grad{
+      background: linear-gradient(135deg, var(--accent2), var(--accent1), var(--accent3));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .subtitle{
+      margin:0;
+      color: var(--muted);
+      max-width: 60ch;
+      font-size:15px;
+      line-height:1.55;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      margin-top:20px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 16px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      text-decoration:none;
+      font-weight:700;
+      font-size:13px;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.20);
+    }
+
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(109,91,255,.92), rgba(30,227,207,.85));
+      color:#081022;
+      border-color: rgba(255,255,255,.06);
+      box-shadow: 0 16px 48px rgba(30,227,207,.12);
+    }
+
+    .btn .icon{
+      width:28px;height:28px;
+      display:grid;
+      place-items:center;
+      border-radius:10px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .btn.primary .icon{
+      background: rgba(8,16,34,.18);
+      border-color: rgba(8,16,34,.12);
+    }
+
+    /* Right side card */
+    .hero-right{
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .mini{
+      padding:16px 16px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+
+    .mini h3{
+      margin:0 0 8px;
+      font-size:14px;
+      letter-spacing:.2px;
+    }
+
+    .kv{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap:10px 12px;
+      align-items:center;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .tag{
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color:var(--text);
+      font-size:12px;
+      font-weight:700;
+      justify-self:end;
+      white-space:nowrap;
+    }
+
+    /* Feature grid */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .card{
+      grid-column: span 4;
+      padding:18px 18px 16px;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(12, 20, 42, .45);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 14px 45px rgba(0,0,0,.35);
+      position:relative;
+      overflow:hidden;
+      transition: transform .18s ease, border-color .18s ease;
+    }
+
+    .card:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.18);
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-60px;
+      background: radial-gradient(circle at 25% 20%, rgba(109,91,255,.18), transparent 60%);
+      pointer-events:none;
+    }
+
+    .card .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+      position:relative;
+    }
+
+    .chip{
+      font-size:11px;
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+      color:var(--muted);
+    }
+
+    .card h2{
+      margin:0 0 10px;
+      font-size:18px;
+      position:relative;
+      letter-spacing:.2px;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+      position:relative;
+    }
+
+    .card a{
+      display:inline-flex;
+      margin-top:14px;
+      text-decoration:none;
+      font-weight:800;
+      font-size:12px;
+      color: var(--text);
+      opacity:.9;
+      position:relative;
+    }
+    .card a:hover{ opacity:1; }
+
+    /* Footer */
+    footer{
+      margin-top:24px;
+      padding:16px 4px 0;
+      color: rgba(233,241,255,.7);
+      font-size:12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .social{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero{ grid-template-columns:1fr; }
+      h1{ font-size:38px; }
+      .card{ grid-column: span 6; }
+    }
+    @media (max-width: 560px){
+      .nav{ border-radius:18px; }
+      .navlinks{ display:none; }
+      h1{ font-size:34px; }
+      .card{ grid-column: span 12; }
+    }
+  </style>
 </head>
+
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">NEXUS</div>
-            <ul class="nav-menu">
-                <li><a href="#services">Services</a></li>
-                <li><a href="#about">À propos</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+  <div class="wrap">
+
+    <!-- NAV -->
+    <div class="nav">
+      <a class="brand" href="#">
+        <div class="logo"></div>
+        <div>
+          <strong>labis2ac</strong>
+          <span>DevOps • Data • Cloud Lab</span>
         </div>
-    </nav>
+      </a>
 
-    <main>
-        <section class="hero">
-            <div class="hero-bg"></div>
-            <div class="container">
-                <div class="hero-content">
-                    <span class="label">Innovation · Design · Technologie</span>
-                    <h1 class="hero-title">
-                        Transformez<br>
-                        <span class="accent">votre vision</span><br>
-                        en réalité digitale
-                    </h1>
-                    <p class="hero-description">
-                        Nous créons des expériences numériques exceptionnelles qui propulsent votre entreprise vers l'avenir.
-                    </p>
-                    <div class="cta-group">
-                        <button class="btn btn-primary">Démarrer un projet</button>
-                        <button class="btn btn-secondary">Découvrir nos réalisations</button>
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="floating-card card-1">
-                        <div class="card-icon">⚡</div>
-                        <div class="card-text">Performance</div>
-                    </div>
-                    <div class="floating-card card-2">
-                        <div class="card-icon">🎨</div>
-                        <div class="card-text">Design</div>
-                    </div>
-                    <div class="floating-card card-3">
-                        <div class="card-icon">🚀</div>
-                        <div class="card-text">Innovation</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <div class="navlinks">
+        <a class="pill" href="#services">Services</a>
+        <a class="pill" href="#stack">Stack</a>
+        <a class="pill" href="#contact">Contact</a>
+      </div>
 
-        <section id="services" class="services">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-label">Ce que nous faisons</span>
-                    <h2 class="section-title">Services</h2>
-                </div>
-                <div class="services-grid">
-                    <article class="service-card">
-                        <div class="service-number">01</div>
-                        <h3 class="service-title">Développement Web</h3>
-                        <p class="service-description">
-                            Applications web modernes, rapides et scalables construites avec les dernières technologies.
-                        </p>
-                        <div class="service-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">Python</span>
-                            <span class="tag">Node.js</span>
-                        </div>
-                    </article>
-                    <article class="service-card">
-                        <div class="service-number">02</div>
-                        <h3 class="service-title">Design UX/UI</h3>
-                        <p class="service-description">
-                            Interfaces intuitives et esthétiques qui placent l'utilisateur au centre de l'expérience.
-                        </p>
-                        <div class="service-tags">
-                            <span class="tag">Figma</span>
-                            <span class="tag">Prototypage</span>
-                            <span class="tag">Recherche UX</span>
-                        </div>
-                    </article>
-                    <article class="service-card">
-                        <div class="service-number">03</div>
-                        <h3 class="service-title">Stratégie Digitale</h3>
-                        <p class="service-description">
-                            Accompagnement stratégique pour maximiser votre impact digital et atteindre vos objectifs.
-                        </p>
-                        <div class="service-tags">
-                            <span class="tag">Consulting</span>
-                            <span class="tag">Analytics</span>
-                            <span class="tag">Growth</span>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
+      <a class="cta" href="#services">🚀 Go</a>
+    </div>
 
-        <section id="about" class="about">
-            <div class="container">
-                <div class="about-grid">
-                    <div class="about-content">
-                        <span class="section-label">Notre approche</span>
-                        <h2 class="section-title">L'excellence par le détail</h2>
-                        <p class="about-text">
-                            Depuis plus de 10 ans, nous combinons expertise technique et vision créative pour 
-                            concevoir des solutions digitales qui font la différence. Notre engagement : 
-                            transformer vos idées en produits exceptionnels.
-                        </p>
-                        <div class="stats">
-                            <div class="stat">
-                                <div class="stat-number">150+</div>
-                                <div class="stat-label">Projets réalisés</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-number">98%</div>
-                                <div class="stat-label">Clients satisfaits</div>
-                            </div>
-                            <div class="stat">
-                                <div class="stat-number">24/7</div>
-                                <div class="stat-label">Support technique</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="about-visual">
-                        <div class="visual-placeholder"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="contact">
-            <div class="container">
-                <div class="contact-wrapper">
-                    <div class="contact-info">
-                        <span class="section-label">Prêt à commencer ?</span>
-                        <h2 class="section-title">Discutons de votre projet</h2>
-                        <p class="contact-text">
-                            Que vous ayez une idée précise ou que vous cherchiez simplement des conseils, 
-                            notre équipe est là pour vous accompagner.
-                        </p>
-                        <div class="contact-details">
-                            <div class="detail">
-                                <div class="detail-icon">📧</div>
-                                <div>
-                                    <div class="detail-label">Email</div>
-                                    <div class="detail-value">contact@nexus.com</div>
-                                </div>
-                            </div>
-                            <div class="detail">
-                                <div class="detail-icon">📱</div>
-                                <div>
-                                    <div class="detail-label">Téléphone</div>
-                                    <div class="detail-value">+33 1 23 45 67 89</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <form class="contact-form">
-                        <div class="form-group">
-                            <label for="name">Nom complet</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-full">Envoyer le message</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="logo">NEXUS</div>
-                    <p>Innovation digitale depuis 2015</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Services</h4>
-                        <ul>
-                            <li><a href="#services">Développement</a></li>
-                            <li><a href="#services">Design</a></li>
-                            <li><a href="#services">Stratégie</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Entreprise</h4>
-                        <ul>
-                            <li><a href="#about">À propos</a></li>
-                            <li><a href="#contact">Contact</a></li>
-                            <li><a href="#">Carrières</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Suivez-nous</h4>
-                        <ul>
-                            <li><a href="#">LinkedIn</a></li>
-                            <li><a href="#">Twitter</a></li>
-                            <li><a href="#">Instagram</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 NEXUS. Tous droits réservés.</p>
-            </div>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="panel hero-left">
+        <div class="badge">
+          <span class="dot"></span>
+          <span>Infrastructure ready • Nginx • Docker • K8s • GitLab</span>
         </div>
+
+        <h1>
+          Bienvenue sur <span class="grad">labis2ac</span>
+        </h1>
+
+        <p class="subtitle">
+          Un mini-lab personnel pour tester rapidement des stacks DevOps & Data :
+          reverse proxy, sous-domaines, certificats SSL, pipelines, orchestration et monitoring.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="#services">
+            <span class="icon">⚡</span>
+            <span>Voir les services</span>
+          </a>
+
+          <a class="btn" href="#stack">
+            <span class="icon">🧱</span>
+            <span>Voir la stack</span>
+          </a>
+
+          <a class="btn" href="#contact">
+            <span class="icon">📩</span>
+            <span>Me contacter</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="panel hero-right">
+        <div class="mini">
+          <h3>✅ Status du Lab</h3>
+          <div class="kv">
+            <div>Environnement</div>
+            <div class="tag">VirtualBox / VM</div>
+
+            <div>Reverse proxy</div>
+            <div class="tag">Nginx</div>
+
+            <div>Certificats</div>
+            <div class="tag">Self-signed SSL</div>
+
+            <div>Object Storage</div>
+            <div class="tag">MinIO</div>
+          </div>
+        </div>
+
+        <div class="mini">
+          <h3>🎯 Objectif</h3>
+          <p style="margin:0;color:var(--muted);font-size:13px;line-height:1.6">
+            Construire une base solide pour héberger plusieurs services accessibles par sous-domaines,
+            avec HTTPS, déploiement simple et monitoring.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="services" class="grid">
+      <div class="card">
+        <div class="top">
+          <div class="chip">Storage</div>
+          <div class="chip">S3</div>
+        </div>
+        <h2>MinIO</h2>
+        <p>Stockage objet pour les fichiers, backups, datasets et tests S3 en local.</p>
+        <a href="#">→ endpoint: minio.labis2ac</a>
+      </div>
+
+      <div class="card">
+        <div class="top">
+          <div class="chip">Orchestration</div>
+          <div class="chip">ETL</div>
+        </div>
+        <h2>Airflow</h2>
+        <p>Pipelines data, scheduling, monitoring des jobs et intégration Great Expectations.</p>
+        <a href="#">→ endpoint: airflow.labis2ac</a>
+      </div>
+
+      <div class="card">
+        <div class="top">
+          <div class="chip">CI/CD</div>
+          <div class="chip">Registry</div>
+        </div>
+        <h2>GitLab</h2>
+        <p>Repo, runners, registry Docker, déploiements et tests automatisés.</p>
+        <a href="#">→ endpoint: gitlab.labis2ac</a>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack" class="grid" style="margin-top:14px;">
+      <div class="card" style="grid-column:span 6;">
+        <div class="top">
+          <div class="chip">Reverse Proxy</div>
+          <div class="chip">HTTPS</div>
+        </div>
+        <h2>Nginx + SSL</h2>
+        <p>
+          Routage par sous-domaines, certificats TLS (self-signed ou Let's Encrypt en prod),
+          headers, redirections HTTP → HTTPS.
+        </p>
+        <a href="#">→ virtualbox.vm.web</a>
+      </div>
+
+      <div class="card" style="grid-column:span 6;">
+        <div class="top">
+          <div class="chip">Containers</div>
+          <div class="chip">Infra</div>
+        </div>
+        <h2>Docker & Compose</h2>
+        <p>
+          Déploiement rapide des services, isolation, volumes, réseaux, et montée en charge facile.
+        </p>
+        <a href="#">→ docker compose up -d</a>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="grid" style="margin-top:14px;">
+      <div class="card" style="grid-column:span 12;">
+        <div class="top">
+          <div class="chip">Contact</div>
+          <div class="chip">labis2ac</div>
+        </div>
+        <h2>Let’s build 🚀</h2>
+        <p>
+          Tu peux utiliser cette page comme dashboard public de ton lab.
+          Si tu veux, je peux te faire une version avec un bouton “Copy endpoints”, ou une section “Docs”.
+        </p>
+        <a href="#">→ hello@labis2ac.local</a>
+      </div>
+    </section>
+
+    <footer>
+      <div>© 2026 <b>labis2ac</b> — Built for DevOps & Data experiments.</div>
+      <div class="social">
+        <a class="pill" href="#">GitHub</a>
+        <a class="pill" href="#">LinkedIn</a>
+        <a class="pill" href="#">Docs</a>
+      </div>
     </footer>
-
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </div>
 </body>
 </html>
